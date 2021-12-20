@@ -5,15 +5,14 @@ const gridHeight = document.querySelector("#inputHeight");
 const gridWidth = document.querySelector("#inputWidth");
 const gridTable = document.querySelector("#pixelCanvas");
 
-
 // Color the cell
 function colorCell(event) {
-    event.target.style.backgroundColor = colorPicker.value;
+  event.target.style.backgroundColor = colorPicker.value;
 }
 
 // Clear the cell
 function clearCell(event) {
-    event.target.style.backgroundColor = "";
+  event.target.style.backgroundColor = "";
 }
 
 // When size is submitted by the user, call makeGrid()
@@ -30,8 +29,8 @@ function makeGrid(event) {
       cell = row.insertCell(c);
       // Note: By adding eventlisteners per cell the browser does become quite slow if your grid is large!
       // Alternatively add a listener on the table!
-      cell.addEventListener('click', colorCell);
-      cell.addEventListener('dblclick', clearCell);
+      cell.addEventListener("click", colorCell);
+      cell.addEventListener("dblclick", clearCell);
     }
   }
 }
