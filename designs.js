@@ -1,8 +1,20 @@
 // Select elements
+const sizePicker = document.querySelector("#sizePicker");
 const colorPicker = document.querySelector("#colorPicker");
 const gridHeight = document.querySelector("#inputHeight");
 const gridWidth = document.querySelector("#inputWidth");
 const gridTable = document.querySelector("#pixelCanvas");
+
+
+// Color the cell
+function colorCell(event) {
+    event.target.style.backgroundColor = colorPicker.value;
+}
+
+// Clear the cell
+function clearCell(event) {
+    event.target.style.backgroundColor = "";
+}
 
 // When size is submitted by the user, call makeGrid()
 function makeGrid(event) {
@@ -15,21 +27,13 @@ function makeGrid(event) {
   for (let r = 0; r < gridHeight.value; r++) {
     let row = gridTable.insertRow(r);
     for (let c = 0; c < gridWidth.value; c++) {
-      row.insertCell(c);
+      cell = row.insertCell(c);
+      // Note: By adding eventlisteners per cell the browser does become quite slow if your grid is large!
+      // Alternatively add a listener on the table!
+      cell.addEventListener('click', colorCell);
+      cell.addEventListener('dblclick', clearCell);
     }
   }
 }
-const formSizePicker = document.querySelector("#sizePicker");
-formSizePicker.addEventListener("submit", makeGrid);
 
-// Create listener for clicks in cell and then colorize them
-function colorCell(event) {
-  if (event.target.style.backgroundColor == "") {
-    //console.log('Colorize this cell!');
-    event.target.style.backgroundColor = colorPicker.value;
-  } else {
-    //console.log('Un-colorize this cell!');
-    event.target.style.backgroundColor = "";
-  }
-}
-gridTable.addEventListener("click", colorCell);
+sizePicker.addEventListener("submit", makeGrid);
